@@ -363,8 +363,15 @@ def cornersHeuristic(state, problem):
     corners = problem.corners # These are the corner coordinates
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
 
-    "*** YOUR CODE HERE ***"
-    return 0 # Default to trivial solution
+    pos = state[0]
+    goals = state[1]
+    ans = 0
+    for goal in goals:
+        ans += (abs(pos[0] - goal[0]) + abs(pos[1] - goal[1]))**2
+        #ans += abs(pos[0] - goal[0]) + abs(pos[1] - goal[1])
+        #ans += ((pos[0] - goal[0]) ** 2 + (pos[1] - goal[1]) ** 2) ** 0.5
+    return ((ans/len(goals))**0.5)
+    #return ans/len(goals)
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
