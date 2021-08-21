@@ -292,6 +292,7 @@ class CornersProblem(search.SearchProblem):
         # Please add any code here which you would like to use
         # in initializing the problem
         self.startState = (self.startingPosition, self.corners)
+        self.gameState = startingGameState
 
     def getStartState(self):
         """
@@ -367,7 +368,8 @@ def cornersHeuristic(state, problem):
     goals = state[1]
     ans = 0
     for goal in goals:
-        ans += (abs(pos[0] - goal[0]) + abs(pos[1] - goal[1]))**2
+        ans += mazeDistance(pos, goal, problem.gameState)**2
+        #ans += (abs(pos[0] - goal[0]) + abs(pos[1] - goal[1]))**2
         #ans += abs(pos[0] - goal[0]) + abs(pos[1] - goal[1])
         #ans += ((pos[0] - goal[0]) ** 2 + (pos[1] - goal[1]) ** 2) ** 0.5
     return ((ans/len(goals))**0.5)
@@ -464,7 +466,6 @@ def foodHeuristic(state, problem):
     problem.heuristicInfo['wallCount']
     """
     position, foodGrid = state
-    "*** YOUR CODE HERE ***"
     return 0
 
 class ClosestDotSearchAgent(SearchAgent):
@@ -494,9 +495,7 @@ class ClosestDotSearchAgent(SearchAgent):
         food = gameState.getFood()
         walls = gameState.getWalls()
         problem = AnyFoodSearchProblem(gameState)
-
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        return search.bfs(problem)
 
 class AnyFoodSearchProblem(PositionSearchProblem):
     """
@@ -530,9 +529,7 @@ class AnyFoodSearchProblem(PositionSearchProblem):
         complete the problem definition.
         """
         x,y = state
-
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        return self.food[x][y]
 
 def mazeDistance(point1, point2, gameState):
     """
