@@ -368,7 +368,7 @@ def cornersHeuristic(state, problem):
     goals = state[1]
     ans = 0
     for goal in goals:
-        ans += mazeDistance(pos, goal, problem.gameState)**2
+        ans += mazeDistance(pos, goal, problem.gameState)**2 # Quadratic mean
         #ans += (abs(pos[0] - goal[0]) + abs(pos[1] - goal[1]))**2
         #ans += abs(pos[0] - goal[0]) + abs(pos[1] - goal[1])
         #ans += ((pos[0] - goal[0]) ** 2 + (pos[1] - goal[1]) ** 2) ** 0.5
